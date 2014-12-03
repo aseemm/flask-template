@@ -14,3 +14,13 @@ Running
 -------
 Run run.py (or) flask/bin/gunicorn --log-file - app:app (starts on localhost:5000 or localhost:8000)
 
+Deploying (after intalling heroku toolbelt)
+---------
+heroku login
+heroku apps:create flask-template
+heroku addons:add heroku-postgresql:dev
+heroku pg:promote HEROKU_POSTGRESQL_CHARCOAL_URL
+heroku config:set HEROKU=1
+git push heroku master
+heroku run init
+
