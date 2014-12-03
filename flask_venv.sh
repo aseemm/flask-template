@@ -1,5 +1,3 @@
-python3 -m venv flask --without-pip
-source flask/bin/activate
 cd flask
 mkdir pypioffline
 cd pypioffline/
@@ -21,3 +19,4 @@ flask/bin/pip install flask-babel
 flask/bin/pip install guess_language
 flask/bin/pip install flipflop
 flask/bin/pip install coverage
+
