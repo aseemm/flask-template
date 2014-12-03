@@ -2,7 +2,6 @@ Template for Flask based webapps (mostly based on the Flask Mega-Tutorial series
 
 Installation
 ------------
-# Setup a virtual environment with all the required modules
 # python3 -m venv flask --without-pip
 # source flask/bin/activate
 # ./flask_venv.sh
@@ -13,5 +12,5 @@ The sqlite database must also be created before the application can run, and the
 
 Running
 -------
-Run run.py
+Run run.py (or) flask/bin/gunicorn --log-file - app:app (starts on localhost:5000 or localhost:8000)
 
