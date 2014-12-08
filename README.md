@@ -22,5 +22,6 @@ heroku addons:add heroku-postgresql:dev
 heroku pg:promote HEROKU_POSTGRESQL_CHARCOAL_URL
 heroku config:set HEROKU=1
 git push heroku master
-heroku run init
+heroku run init --app flask-template1
+
 
