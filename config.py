@@ -1,5 +1,7 @@
 # -*- coding: utf8 -*-
 import os
+from celery.schedules import crontab
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 CSRF_ENABLED = True
@@ -51,3 +53,7 @@ ADMINS = ['you@example.com']
 # pagination
 POSTS_PER_PAGE = 50
 MAX_SEARCH_RESULTS = 50
+
+# celery
+CELERY_BROKER_URL = 'amqp://'
+CELERY_BACKEND_URL = 'amqp://'

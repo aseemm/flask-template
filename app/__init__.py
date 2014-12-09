@@ -9,9 +9,46 @@ from flask.ext.babel import Babel, lazy_gettext
 from config import basedir, ADMINS, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, \
     MAIL_PASSWORD
 from .momentjs import momentjs
+from celery import Celery
 
 app = Flask(__name__)
 app.config.from_object('config')
+
+def make_celery(app):
+    celery = Celery(app.import_name, broker=app.config['CELERY_BROKER_URL'], backend=app.config['CELERY_BACKEND_URL'])
+    celery.conf.update(app.config)
+    TaskBase = celery.Task
+    class ContextTask(TaskBase):
+        abstract = True
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return TaskBase.__call__(self, *args, **kwargs)
+    celery.Task = ContextTask
+    return celery
+
+celery = make_celery(app)
+
+@celery.task(ignore_result=True)
+def print_hello():
+    print("hello there")
+
+@celery.task
+def read_entries(x):
+    results = []
+    users = models.User.query.all()
+    for u in users:
+        results.append([u.id, u.nickname])
+        print(u.id, u.nickname)
+    return results
+
+@celery.task
+def write_entries(name_input, email_input):
+    results = True
+    u = models.User(nickname=name_input, email=email_input)
+    db.session.add(u)
+    db.session.commit()
+    return results
+
 db = SQLAlchemy(app)
 lm = LoginManager()
 lm.init_app(app)

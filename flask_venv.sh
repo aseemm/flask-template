@@ -21,4 +21,4 @@ flask/bin/pip install guess_language
 flask/bin/pip install flipflop
 flask/bin/pip install coverage
 flask/bin/pip install gunicorn
-flask/bin/pip pip install celery
+flask/bin/pip install celery

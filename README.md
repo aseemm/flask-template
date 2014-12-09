@@ -24,4 +24,8 @@ heroku config:set HEROKU=1
 git push heroku master
 heroku run init --app flask-template1
 
+Celery
+------
+ps auxww | grep 'celery worker' | awk '{print $2}' | xargs kill -9
+celery -A app.celery worker --loglevel=info &
 
