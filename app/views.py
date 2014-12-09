@@ -242,3 +242,7 @@ def translate():
             request.form['text'],
             request.form['sourceLang'],
             request.form['destLang'])})
+
+@app.route('/ticker')
+def ticker():
+    return "Hello World!"
