@@ -13,7 +13,10 @@ from .emails import follower_notification
 from .translate import microsoft_translate
 from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS, LANGUAGES, \
     DATABASE_QUERY_TIMEOUT
-
+from quote import get_stock_quote
+import json
+import pprint
+import requests
 
 @lm.user_loader
 def load_user(id):
@@ -245,4 +248,8 @@ def translate():
 
 @app.route('/ticker')
 def ticker():
-    return "Hello World!"
+    quote = get_stock_quote('PANW')
+    users = User.query.all()
+    return render_template('ticker.html',
+                           quote=quote,
+                           users=users)
