@@ -19,6 +19,11 @@ if os.environ.get('DATABASE_URL') is None:
                                '?check_same_thread=False')
 else:
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+
+# SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@localhost/library'
+# slow database query threshold (in seconds)
+# DATABASE_QUERY_TIMEOUT = 0.5
+
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SQLALCHEMY_RECORD_QUERIES = True
 WHOOSH_BASE = os.path.join(basedir, 'search.db')

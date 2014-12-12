@@ -29,3 +29,10 @@ Celery
 ps auxww | grep 'celery worker' | awk '{print $2}' | xargs kill -9
 celery -A app.celery worker --loglevel=info &
 
+Curl
+----
+curl -i http://localhost:5000/books/1
+curl -i http://localhost:5000/books?limit=10
+curl -i -H "Content-Type: application/json" -X POST -d '{"title":"D", "author":"D"}' http://localhost:5000/books
+curl -i -H "Content-Type: application/json" -X PUT -d '{"title":"Darva"}' http://localhost:5000/books/11
+curl -i -H "Content-Type: application/json" -X DELETE http://localhost:5000/books/11
